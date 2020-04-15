@@ -111,6 +111,7 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
         ),
         onTap: (){
           print("Url is =${data.items[index].url}");
+          githubBloc.fetchSingleUserInfo(data.items[index].url);
         },
       );
     },
