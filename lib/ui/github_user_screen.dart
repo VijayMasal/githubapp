@@ -12,83 +12,34 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
   TextEditingController controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-
-
   return _buildGithubUserScreen();
   }
 
-  Widget _buildListView(GitHubResponse data){
-
-  return  ListView.separated(
-    itemCount: data.items.length,
-    itemBuilder: (context, index) {
-      var _size = MediaQuery.of(context).size;
-      return ListTile(
-        title: Text(
-          data.items[index].login,
-          style: TextStyle(fontFamily: 'BrandingSemiBold', fontSize: 18)
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-                child: Text(
-                    'Id:${data.items[index].id}',
-                  style: TextStyle(fontFamily: 'BrandingLight', fontSize: 14),
-
-                )
-            ),
-
-
-            Container(
-
-                child: Text('Score${data.items[index].score}')
-            ),
-
-            SizedBox(width: _size.width * 0.1,),
-          ],
-        ),
-        leading: CircleAvatar(
-            child: ClipOval(
-                child: Image.network(data.items[index].avatar_url)
-            )
-        ),
-        trailing:Icon(
-          Icons.arrow_forward_ios
-        ),
-      );
-    },
-    separatorBuilder: (context, index) {
-      return Divider();
-    },
-  );
-  }
-
+  //Github user screen contains search bar and user listview
   Widget _buildGithubUserScreen() {
-
-
     return SafeArea(
       child: Column(
         children: <Widget>[
+          //loads search bar
           _buildSearchBar(),
-          Expanded(
-          child: StreamBuilder(
-        stream: githubBloc.items,
-        builder: (context, AsyncSnapshot<GitHubResponse> snapshot) {
-          if (snapshot.hasData) {
-            //return _buildGithubUserScreen(snapshot.data);
-            return _buildListView(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          }
-          return Center(child: CircularProgressIndicator());
-        })
+          Expanded(//loads github user list
+              child: StreamBuilder(
+                  stream: githubBloc.items,
+                  builder: (context, AsyncSnapshot<GitHubResponse> snapshot) {
+                    if (snapshot.hasData) {
+                      return _buildListView(snapshot.data);
+                    } else if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  })
           ),
         ],
       ),
     );
   }
 
+  //Search bar container
   Widget _buildSearchBar() {
     return new Container(
       color: Color.fromRGBO(119, 68, 142, 1.0),
@@ -105,11 +56,10 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
               decoration: new InputDecoration(
                   hintText: 'Search', border: InputBorder.none),
               onChanged: (value) {
-               if (value != "") {
-                 githubBloc.fetchUserItems(value);
-               }
-
-
+                if (value != "") {
+                  //fetch github users as per search value
+                  githubBloc.fetchUserItems(value);
+                }
               },
             ),
             trailing: new IconButton(
@@ -123,8 +73,52 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
     );
   }
 
+  //ListView container shows serched user login, id, score, and avtar image
+  Widget _buildListView(GitHubResponse data){
+  return  ListView.separated(
+    itemCount: data.items.length,
+    itemBuilder: (context, index) {
+      var _size = MediaQuery.of(context).size;
+      return ListTile(//Inside list title shows github user list
+        title: Text(//shows github user login
+          data.items[index].login,
+          style: TextStyle(fontFamily: 'BrandingSemiBold', fontSize: 18)
+        ),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+                child: Text(//shows github user id
+                    'Id:${data.items[index].id}',
+                  style: TextStyle(fontFamily: 'BrandingLight', fontSize: 14),
+
+                )
+            ),
+            Container(// shows github user score
+
+                child: Text('Score${data.items[index].score}')
+            ),
+            SizedBox(width: _size.width * 0.1,),
+          ],
+        ),
+        leading: CircleAvatar(//shows github user avtar image
+            child: ClipOval(
+                child: Image.network(data.items[index].avatar_url)
+            )
+        ),
+        trailing:Icon(
+          Icons.arrow_forward_ios
+        ),
+      );
+    },
+    separatorBuilder: (context, index) {
+      return Divider();
+    },
+  );
+  }
+
+  //clear search text
   onSearchTextChanged(String text) async {
-   githubBloc.dispose();
     if (controller.text.isEmpty) {
       setState(() {});
       return;
