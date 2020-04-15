@@ -42,41 +42,21 @@ class FollowersScreenState extends State<FollowersScreen> {
   Widget build(BuildContext context) {
     //githubBloc.fetchFollowerItems(user_Url);
     return Scaffold(
-      body: StreamBuilder(
-          stream: githubBloc.followerItems,
-          builder: (context, AsyncSnapshot<FollowersResponse> snapshot) {
-            if (snapshot.hasData) {
-              return _buildListView(snapshot.data);
-            } else if (snapshot.hasError) {
-              return Text(snapshot.error.toString());
-            }
-            return Center(child: CircularProgressIndicator());
-          }),
-    );
-  }
-
-  Widget _buildGithubUserScreen() {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          //loads search bar
-          _buildTabBar(),
-          Expanded(//loads github user list
-              child: StreamBuilder(
-                  stream: githubBloc.followerItems,
-                  builder: (context, AsyncSnapshot<FollowersResponse> snapshot) {
-                    if (snapshot.hasData) {
-                      return _buildListView(snapshot.data);
-                    } else if (snapshot.hasError) {
-                      return Text(snapshot.error.toString());
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  })
-          ),
-        ],
+      body: SafeArea(
+        child: StreamBuilder(
+            stream: githubBloc.followerItems,
+            builder: (context, AsyncSnapshot<FollowersResponse> snapshot) {
+              if (snapshot.hasData) {
+                return _buildListView(snapshot.data);
+              } else if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              }
+              return Center(child: CircularProgressIndicator());
+            }),
       ),
     );
   }
+
 
 
   //ListView container shows serched user login, id, score, and avtar image
