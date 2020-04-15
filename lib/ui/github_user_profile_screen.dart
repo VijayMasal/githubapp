@@ -187,14 +187,9 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                   onPressed: (){
                     print('Followers pressed ${followers_url}');
                     if(followers > 0){
-                      //githubBloc.fetchFollowerItems(followers_url);
-//                      Navigator.push(
-//                        context,
-//                        MaterialPageRoute(builder: (context) => FollowersScreen(user_Url: followers_url,name: name,)),
-//                      );
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TabBarScreen(user_Url: followers_url,name: name,)),
+                        MaterialPageRoute(builder: (context) => TabBarScreen(followers_url:followers_url,following_url:'${user_Url}/following',name: name,)),
                       );
                     }else{
                       _showAlert("No any Followers");
@@ -215,7 +210,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                       //githubBloc.fetchFollowerItems(followers_url);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FollowersScreen(user_Url: followings_url,)),
+                        MaterialPageRoute(builder: (context) => TabBarScreen(followers_url:followers_url,following_url:'${user_Url}/following',name: name,)),
                       );
                     }else{
                       _showAlert("No any Following");

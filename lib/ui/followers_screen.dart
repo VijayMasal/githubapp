@@ -5,25 +5,37 @@ import 'package:fluttergithubapp/model/followers_response_model.dart';
 
 class FollowersScreen extends StatefulWidget {
 
-  FollowersScreen({this.user_Url,this.name, Key key}) : super(key: key);
-  String user_Url;
+  FollowersScreen({this.followers_url,this.following_url,this.isFollows,this.name, Key key}) : super(key: key);
+  String followers_url;
+  bool isFollows = true;
+  String following_url;
   String name;
   @override
-  FollowersScreenState createState() => FollowersScreenState(user_Url: user_Url,name: name);
+  FollowersScreenState createState() => FollowersScreenState(followers_url: followers_url,following_url: following_url,name: name,isFollows: isFollows);
 }
 
 
 class FollowersScreenState extends State<FollowersScreen> {
-  FollowersScreenState({this.user_Url,this.name}) ;
-  String user_Url;
+  FollowersScreenState({this.followers_url,this.following_url,this.isFollows,this.name}) ;
+  String followers_url;
+  String following_url;
   String name;
+  bool isFollows = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("user_Url ${user_Url}");
-    githubBloc.fetchFollowerItems(user_Url);
+    print("user_Url ${followers_url}");
+    if(isFollows == true){
+      githubBloc.fetchFollowerItems(followers_url);
+    }
+    else{
+      githubBloc.fetchFollowerItems(following_url);
+    }
+
+
+
   }
 
   @override
@@ -98,10 +110,6 @@ class FollowersScreenState extends State<FollowersScreen> {
           ),
           onTap: (){
 
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(builder: (context) => UserProfileScreen(user_Url:data.items[index].url ,)),
-//            );
           },
         );
       },

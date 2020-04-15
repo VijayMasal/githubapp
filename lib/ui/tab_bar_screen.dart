@@ -3,18 +3,20 @@ import 'package:fluttergithubapp/ui/followers_screen.dart';
 
 
 class TabBarScreen extends StatefulWidget {
-  TabBarScreen({this.user_Url,this.name, Key key}) : super(key: key);
-  String user_Url;
+  TabBarScreen({this.followers_url,this.following_url,this.name, Key key}) : super(key: key);
+  String followers_url;
+  String following_url;
   String name;
   @override
-  TabBarScreenState createState() => TabBarScreenState(user_Url: user_Url,name: name);
+  TabBarScreenState createState() => TabBarScreenState(followers_url: followers_url,following_url: following_url,name: name);
 }
 
 
 class TabBarScreenState extends State<TabBarScreen> with
     TickerProviderStateMixin {
-  TabBarScreenState({this.user_Url,this.name}) ;
-  String user_Url;
+  TabBarScreenState({this.followers_url,this.following_url,this.name}) ;
+  String followers_url;
+  String following_url;
   String name;
   TabController _tabController;
 
@@ -59,8 +61,8 @@ class TabBarScreenState extends State<TabBarScreen> with
                 child:TabBarView(
                   controller: _tabController,
                   children: <Widget>[
-                    FollowersScreen(user_Url: user_Url,name:name ,),
-                    FollowersScreen(user_Url: user_Url,name:name ,),
+                    FollowersScreen(followers_url:followers_url,following_url: following_url,name:name ,isFollows: true,),
+                    FollowersScreen(followers_url: followers_url,following_url: following_url,name:name,isFollows: false ,),
                   ],
                 ),
               ),
