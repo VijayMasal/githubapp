@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttergithubapp/bloc/github_bloc.dart';
 import 'package:fluttergithubapp/model/github_response_model.dart';
+import 'package:fluttergithubapp/ui/github_user_profile_screen.dart';
 
 class GitHubUserScreen extends StatefulWidget {
   @override
@@ -112,6 +113,10 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
         onTap: (){
           print("Url is =${data.items[index].url}");
           githubBloc.fetchSingleUserInfo(data.items[index].url);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => UserProfileScreen(user_Url:data.items[index].url ,)),
+          );
         },
       );
     },
