@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(119, 68, 142, 1.0),
-        title: Text('GitHub'),
+        title: Text('GitHub',style: TextStyle(fontFamily: 'BrandingBold', fontSize: 24),),
       ),
       body: GitHubUserScreen(),
     );

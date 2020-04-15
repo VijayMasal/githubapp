@@ -70,6 +70,9 @@ fonts:
   - family: BrandingSemiBold
     fonts:
       - asset: assets/branding_semibold_0.otf
+  - family: BrandingBold
+    fonts:
+      - asset: assets/branding_bold_0.otf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
