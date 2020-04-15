@@ -110,7 +110,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(119, 68, 142, 1.0),
-        title: Text('Pofile',style: TextStyle(fontFamily: 'BrandingBold', fontSize: 18),),
+        title: Text('Profile',style: TextStyle(fontFamily: 'BrandingBold', fontSize: 18),),
       ),
       body: Container(
         height: _size.height * 0.6 ,
