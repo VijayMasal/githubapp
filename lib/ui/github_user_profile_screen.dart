@@ -113,7 +113,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
         title: Text('Profile',style: TextStyle(fontFamily: 'BrandingBold', fontSize: 18),),
       ),
       body: Container(
-        height: _size.height * 0.6 ,
+        height: _size.height * 0.7 ,
         child: Card(
           elevation: 6.0,
           margin: EdgeInsets.only(top: 20,left: 10,right: 10),
@@ -151,7 +151,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
         child: ClipOval(
               child: Image.network(avtar_url,)
           ),
-        radius: 70,
+        radius: 58,
       ),
     );
   }
