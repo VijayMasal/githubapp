@@ -113,13 +113,14 @@ class UserProfileScreenState extends State<UserProfileScreen> {
         title: Text('Profile',style: TextStyle(fontFamily: 'BrandingBold', fontSize: 18),),
       ),
       body: Container(
-        height: _size.height * 0.7 ,
+        height: _size.height * 0.68 ,
         child: Card(
           elevation: 6.0,
           margin: EdgeInsets.only(top: 20,left: 10,right: 10),
           child: Column(
             children: <Widget>[
               Container(
+                height: _size.height * 0.35,
                 child: Container(
                   color: Color.fromRGBO(250, 250, 250, 1.0),
                   child: Column(
@@ -146,7 +147,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
 
   Widget _buildAvtarImage(){
     return Container(
-      margin: EdgeInsets.only(top:  20),
+      margin: EdgeInsets.only(top:  10),
       child: CircleAvatar(//shows github user avtar image
         child: ClipOval(
               child: Image.network(avtar_url,)
@@ -158,11 +159,12 @@ class UserProfileScreenState extends State<UserProfileScreen> {
 
   Widget _buildNameAndLocationSection(){
     return Container(
-      margin: EdgeInsets.only(top:  10),
+//      margin: EdgeInsets.only(top:  5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
+            margin: EdgeInsets.only(top:  5),
             child: Center(
               child: Text(name,style: TextStyle(fontFamily: 'BrandingBold', fontSize: 24)),
             ),
@@ -178,7 +180,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
           ),
         ),
           Container(
-            margin: EdgeInsets.only(top:  10),
+            margin: EdgeInsets.only(top:  5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -200,7 +202,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                   },
                 ),
                 SizedBox(width: 5,),
-                Container(height: 10,width: 1,color: Colors.grey,),
+                Container(height: 5,width: 1,color: Colors.grey,),
                 SizedBox(width: 5,),
                 FlatButton(
                   child: Text('${followings} Following',style: TextStyle(fontFamily: 'BrandingMedium', fontSize: 12)),
