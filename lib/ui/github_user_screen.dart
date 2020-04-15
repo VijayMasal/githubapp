@@ -24,12 +24,19 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
     itemBuilder: (context, index) {
       var _size = MediaQuery.of(context).size;
       return ListTile(
-        title: Text(data.items[index].login),
+        title: Text(
+          data.items[index].login,
+          style: TextStyle(fontFamily: 'BrandingSemiBold', fontSize: 18)
+        ),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-                child: Text('Id:${data.items[index].id}')
+                child: Text(
+                    'Id:${data.items[index].id}',
+                  style: TextStyle(fontFamily: 'BrandingLight', fontSize: 14),
+
+                )
             ),
 
 
