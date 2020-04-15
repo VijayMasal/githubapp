@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttergithubapp/bloc/github_bloc.dart';
+import 'package:fluttergithubapp/model/followers_response_model.dart';
 import 'package:fluttergithubapp/model/user_info_response_model.dart';
 import 'package:fluttergithubapp/persistance/repository.dart';
+import 'package:fluttergithubapp/ui/followers_screen.dart';
+import 'package:fluttergithubapp/ui/tab_bar_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   UserProfileScreen({this.user_Url, Key key}) : super(key: key);
@@ -100,6 +103,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     var _size = MediaQuery.of(context).size;
@@ -181,7 +185,23 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                 FlatButton(
                   child: Text('${followers} Followers',style: TextStyle(fontFamily: 'BrandingLight', fontSize: 12)),
                   onPressed: (){
-                    print('Followers pressed');
+                    print('Followers pressed ${followers_url}');
+                    if(followers > 0){
+                      //githubBloc.fetchFollowerItems(followers_url);
+//                      Navigator.push(
+//                        context,
+//                        MaterialPageRoute(builder: (context) => FollowersScreen(user_Url: followers_url,name: name,)),
+//                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TabBarScreen(user_Url: followers_url,name: name,)),
+                      );
+                    }else{
+                      _showAlert("No any Followers");
+                    }
+
+
+
                   },
                 ),
                 SizedBox(width: 5,),
@@ -191,6 +211,15 @@ class UserProfileScreenState extends State<UserProfileScreen> {
                   child: Text('${followings} Following',style: TextStyle(fontFamily: 'BrandingMedium', fontSize: 12)),
                   onPressed: (){
                     print('Following pressed');
+                    if(followings > 0){
+                      //githubBloc.fetchFollowerItems(followers_url);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FollowersScreen(user_Url: followings_url,)),
+                      );
+                    }else{
+                      _showAlert("No any Following");
+                    }
                   },
                 )
               ],
@@ -245,6 +274,35 @@ class UserProfileScreenState extends State<UserProfileScreen> {
 
     );
   }
+
+  void _showAlert(String msg) {
+    showDialog<Null>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          //title: new Text('You clicked on'),
+          content: new SingleChildScrollView(
+            child: new ListBody(
+              children: <Widget>[
+                new Text(msg ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
 }
 
 
