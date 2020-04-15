@@ -1,8 +1,7 @@
 
 
 class UserInfoResponse {
-  double _lon;
-  double _lat;
+  String _login;
   String _name;
   String _avatar_url;
   String _followers_url;
@@ -16,6 +15,7 @@ class UserInfoResponse {
   int _following;
 
   UserInfoResponse.fromJson(Map<String, dynamic> parsedJson) {
+    _login = parsedJson['login'];
     _name = parsedJson['name'];
     _avatar_url = parsedJson['avatar_url'];
     _followers_url = parsedJson['followers_url'];
@@ -38,6 +38,11 @@ class UserInfoResponse {
     _name = value;
   }
 
+  String get login => _login;
+
+  set login(String value) {
+    _login = value;
+  }
 
   String get avatar_url => _avatar_url;
 
@@ -102,6 +107,7 @@ class UserInfoResponse {
   set following(int value) {
     _following = value;
   }
+
 
 
 }

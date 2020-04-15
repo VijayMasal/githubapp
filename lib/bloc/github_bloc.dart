@@ -16,13 +16,16 @@ class GitHubBloc{
     _itemsFetcher.sink.add(userResponse);
   }
 
-  final _singleUserInfoFetcher = PublishSubject<UserInfoResponse>();
+  //final _singleUserInfoFetcher = PublishSubject<UserInfoResponse>();
 
-  Observable<UserInfoResponse> get userInfo => _singleUserInfoFetcher.stream;
+  //Observable<UserInfoResponse> get userInfo => _singleUserInfoFetcher.stream;
 
-  fetchSingleUserInfo(String _user_url) async {
+
+ Future<UserInfoResponse> fetchSingleUserInfo(String _user_url) async {
     UserInfoResponse userResponse = await _repository.fetchSingleUserInfo(_user_url);
-    _singleUserInfoFetcher.sink.add(userResponse);
+//print('userResponse ${userResponse.name}');
+    //_singleUserInfoFetcher.sink.add(userResponse);
+   return userResponse;
   }
 
   dispose() {

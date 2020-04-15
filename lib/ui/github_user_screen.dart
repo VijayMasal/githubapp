@@ -111,8 +111,7 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
           Icons.arrow_forward_ios
         ),
         onTap: (){
-          print("Url is =${data.items[index].url}");
-          githubBloc.fetchSingleUserInfo(data.items[index].url);
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => UserProfileScreen(user_Url:data.items[index].url ,)),
