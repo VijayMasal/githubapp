@@ -109,6 +109,9 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
         trailing:Icon(
           Icons.arrow_forward_ios
         ),
+        onTap: (){
+          print("Url is =${data.items[index].url}");
+        },
       );
     },
     separatorBuilder: (context, index) {
