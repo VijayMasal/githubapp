@@ -11,6 +11,7 @@ class GitHubUserScreen extends StatefulWidget {
 
 class GitHubUserScreenState extends State<GitHubUserScreen> {
   TextEditingController controller = new TextEditingController();
+  bool isShow = false;
   @override
   Widget build(BuildContext context) {
   return _buildGithubUserScreen();
@@ -32,7 +33,7 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
                     } else if (snapshot.hasError) {
                       return Text(snapshot.error.toString());
                     }
-                    return Center(child: CircularProgressIndicator());
+                    return isShow ? Center(child: CircularProgressIndicator()) : Center(child: Text(''));
                   })
           ),
         ],
@@ -59,6 +60,9 @@ class GitHubUserScreenState extends State<GitHubUserScreen> {
               onChanged: (value) {
                 if (value != "") {
                   //fetch github users as per search value
+                  setState(() {
+                    isShow = true;
+                  });
                   githubBloc.fetchUserItems(value);
                 }
               },
