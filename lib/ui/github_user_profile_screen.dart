@@ -35,11 +35,11 @@ class UserProfileScreenState extends State<UserProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-      fetchSingleUserInfo(user_Url);
+    fetchSingleUserInfo(user_Url);
   }
 
   //Fetch user info
-   fetchSingleUserInfo(String _user_url) async {
+  fetchSingleUserInfo(String _user_url) async {
     Repository _repository = Repository();
     UserInfoResponse userResponse = await _repository.fetchSingleUserInfo(_user_url);
     setState(() {
@@ -112,35 +112,32 @@ class UserProfileScreenState extends State<UserProfileScreen> {
         backgroundColor: Color.fromRGBO(119, 68, 142, 1.0),
         title: Text('Profile',style: TextStyle(fontFamily: 'BrandingBold', fontSize: 18),),
       ),
-      body: Container(
-        height: _size.height * 0.68 ,
-        child: Card(
-          elevation: 6.0,
-          margin: EdgeInsets.only(top: 20,left: 10,right: 10),
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: _size.height * 0.35,
-                child: Container(
-                  color: Color.fromRGBO(250, 250, 250, 1.0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(child: _buildAvtarImage()),
-                      Container(
-                        child: _buildNameAndLocationSection(),
-                        //margin: EdgeInsets.only(bottom: 20),
+      body: ListView(
 
+        children: <Widget>[
+          ListTile(
+            title: Card(
+              elevation: 5.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      color: Color.fromRGBO(250, 250, 250, 1.0),
+                      child: Column(
+                        children: <Widget>[
+                          Container(child: _buildAvtarImage()),
+                          Container( child: _buildNameAndLocationSection(),),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    _buildInfoSection(),
+                  ],
                 ),
               ),
-              Expanded(
-                child: _buildInfoSection(),
-              )
-            ],
-          ),
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -150,8 +147,8 @@ class UserProfileScreenState extends State<UserProfileScreen> {
       margin: EdgeInsets.only(top:  10),
       child: CircleAvatar(//shows github user avtar image
         child: ClipOval(
-              child: Image.network(avtar_url,)
-          ),
+            child: Image.network(avtar_url,)
+        ),
         radius: 58,
       ),
     );
@@ -169,16 +166,16 @@ class UserProfileScreenState extends State<UserProfileScreen> {
               child: Text(name,style: TextStyle(fontFamily: 'BrandingBold', fontSize: 24)),
             ),
           ),
-        Container(
-          margin: EdgeInsets.only(top:  5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(Icons.location_on,size: 18,),
-              Text(location,style: TextStyle(fontFamily: 'BrandingLight', fontSize: 12,color: Colors.grey))
-            ],
+          Container(
+            margin: EdgeInsets.only(top:  5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.location_on,size: 18,),
+                Text(location,style: TextStyle(fontFamily: 'BrandingLight', fontSize: 12,color: Colors.grey))
+              ],
+            ),
           ),
-        ),
           Container(
             margin: EdgeInsets.only(top:  5),
             child: Row(
@@ -230,9 +227,9 @@ class UserProfileScreenState extends State<UserProfileScreen> {
   }
   Widget _buildInfoSection(){
     return Container(
-      margin: EdgeInsets.only(top:  10),
+      margin: EdgeInsets.only(bottom: 20),
       child: Column(
-       crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             height: 40,
@@ -259,7 +256,7 @@ class UserProfileScreenState extends State<UserProfileScreen> {
           ),
           Container(
             height: 40,
-             margin: EdgeInsets.only(top:  5),
+            margin: EdgeInsets.only(top:  5),
             child: ListTile(
               title: Text('Updated at:') ,
               subtitle:Text(updated_at) ,
@@ -301,5 +298,6 @@ class UserProfileScreenState extends State<UserProfileScreen> {
 
 
 }
+
 
 
